@@ -1,4 +1,4 @@
-# QuickStart Demo
+# QuickStart Walrus
 
 查看服务实例部署在线文档，请访问 [服务实例部署文档](https://aliyun-computenest.github.io/quickstart-demo)
 
