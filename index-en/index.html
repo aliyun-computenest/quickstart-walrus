@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>Walrus Service Instance Deployment Documentation - Aliyun 计算巢 x Demo</title>
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="../search/main.js"></script>
+  
+
+  
+
+  <script src="../js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#walrus-service-instance-deployment-documentation">Walrus Service Instance Deployment Documentation</a></li>
+              
+                  <li><a href="#overview">Overview</a></li>
+                  
+              
+                  <li><a href="#billing-description">Billing Description</a></li>
+                  
+              
+                  <li><a href="#deployment-architecture">Deployment Architecture</a></li>
+                  
+              
+                  <li><a href="#required-permissions-for-ram-users">Required Permissions for RAM Users</a></li>
+                  
+              
+                  <li><a href="#deployment-process">Deployment process</a></li>
+                  
+                      <li class="li-h3"><a href="#deployment-steps">Deployment Steps</a></li>
+                  
+                      <li class="li-h3"><a href="#deployment-parameter-description">Deployment Parameter Description</a></li>
+                  
+                      <li class="li-h3"><a href="#verification-results">Verification Results</a></li>
+                  
+              
+                  <li><a href="#help-documentation">Help documentation</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="walrus-service-instance-deployment-documentation">Walrus Service Instance Deployment Documentation</h1>
+<blockquote>
+<p><strong>Disclaimer:</strong></p>
+<p>This service is provided by a third party. We try our best to ensure its safety, accuracy and reliability, but we cannot guarantee that it is completely free from failure, interruption, error or attack. Therefore, the company hereby declares that it makes no representations, warranties or commitments regarding the content, accuracy, completeness, reliability, suitability and timeliness of the Service and is not liable for any direct or indirect loss or damage arising from your use of the Service; for third-party websites, applications, products and services that you access through the Service, do not assume any responsibility for its content, accuracy, completeness, reliability, applicability and timeliness, and you shall bear the risks and responsibilities of the consequences of use; for any loss or damage arising from your use of this service, including but not limited to direct loss, indirect loss, loss of profits, loss of goodwill, loss of data or other economic losses, even if we have been advised in advance of the possibility of such loss or damage; we reserve the right to amend this statement from time to time, so please check this statement regularly before using the Service. If you have any questions or concerns about this Statement or the Service, please contact us.</p>
+</blockquote>
+<h2 id="overview">Overview</h2>
+<p>The Walrus Application Management Platform is a platform for managing and deploying applications. It provides a centralized management interface that enables users to easily manage the application lifecycle, including creating, configuring, deploying, monitoring, and maintaining applications. Walrus also offers advanced features such as application versioning, automated deployment, and elastic scaling to help users better manage and run their apps.</p>
+<p>This article shows you how to provision Walrus on the computing nest, as well as the deployment process and usage instructions.</p>
+<h2 id="billing-description">Billing Description</h2>
+<p>Walrus's expenses on computing nests relate primarily:</p>
+<p>-Selected vCPU and memory specifications
+-System disk type and capacity
+-Public network bandwidth</p>
+<h2 id="deployment-architecture">Deployment Architecture</h2>
+<p><img alt="" src="../images-en/arch.png" /></p>
+<h2 id="required-permissions-for-ram-users">Required Permissions for RAM Users</h2>
+<p>The Walrus service needs to access and create resources such as ECS and VPC. If you use a RAM user to create a service instance, you need to add the corresponding resource permissions to the account of the RAM user before creating the service instance. For details about how to add RAM permissions, see <a href="https://help.aliyun.com/document_detail/121945.html">RAM User Authorization</a>
+。 The required permissions are shown in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Permission policy name</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AliyunECSFullAccess</td>
+<td>Permissions to manage ECS instances</td>
+</tr>
+<tr>
+<td>AliyunVPCReadOnlyAccess</td>
+<td>Read-only access to VPC</td>
+</tr>
+<tr>
+<td>AliyunROSFullAccess</td>
+<td>Manage permissions for Resource Orchestration Service (ROS)</td>
+</tr>
+<tr>
+<td>AliyunComputeNestUserFullAccess</td>
+<td>Manage user-side permissions for the compute nest service (ComputeNest)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deployment-process">Deployment process</h2>
+<h3 id="deployment-steps">Deployment Steps</h3>
+<p>Click <a href="https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&amp;ServiceId=service-ff8fc794c05042968b39">Deployment Link</a> to enter the service instance deployment page, and fill in the parameters according to the interface prompts to complete the deployment.</p>
+<p><img alt="" src="../images-en/params.png" /></p>
+<h3 id="deployment-parameter-description">Deployment Parameter Description</h3>
+<p>During the process of creating a service instance, you need to configure the service instance information. The details of the Walrus service instance input parameters are described below.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Group</th>
+<th>Parameter Item</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service instance name</td>
+<td></td>
+<td>walrus-test</td>
+<td>Name of the instance</td>
+</tr>
+<tr>
+<td>Region</td>
+<td></td>
+<td>cn-hangzhou</td>
+<td>Select the region of the service instance. We recommend that you select the region nearby to obtain better network latency.</td>
+</tr>
+<tr>
+<td>ECS instance configuration</td>
+<td>Instance type</td>
+<td>ecs.g6.large</td>
+<td>ECS instance type, which can be selected according to actual needs.</td>
+</tr>
+<tr>
+<td>zone configuration</td>
+<td>zone</td>
+<td>cn-hangzhou-j</td>
+<td>different zones in different regions.</td>
+</tr>
+<tr>
+<td>Network Configuration</td>
+<td>Whether to create a VPC</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>Network Configuration</td>
+<td>VPC IPv4 CIDR block</td>
+<td>192.168.0.0/16</td>
+<td></td>
+</tr>
+<tr>
+<td>Network Configuration</td>
+<td>Switch Subnet Segment</td>
+<td>192.168.1.0/24</td>
+<td></td>
+</tr>
+<tr>
+<td>Network configuration</td>
+<td>VPC instance ID</td>
+<td>vpc-******</td>
+<td></td>
+</tr>
+<tr>
+<td>Network Configuration</td>
+<td>VSwitch Instance ID</td>
+<td>vsw-******</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="verification-results">Verification Results</h3>
+<ol>
+<li>View the service instance. After the service instance is created successfully, the deployment time takes about 5 minutes. After deployment is complete, you can see the corresponding service instances on the page.</li>
+</ol>
+<p><img alt="" src="../images-en/r1.png" />
+2. Access Walrus through a service instance. After entering the corresponding service instance, you can obtain the address of the Walrus login page and the initial password of the admin account on the page.</p>
+<p><img alt="" src="../images-en/r2.png" /></p>
+<p><img alt="" src="../images-en/r3.png" />
+3. After successful login, configure and use Walrus.<img alt="" src="images-en/r4.png" /></p>
+<h2 id="help-documentation">Help documentation</h2>
+<p>Please visit the <a href="https://github.com/seal-io/walrus">Walrus User's Guide</a> to learn how to use it.</p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.1
+  Docs Build Date UTC : 2026-03-23 09:03:56.462229+00:00
+  -->
+</body>
+</html>
